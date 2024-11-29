@@ -10,10 +10,12 @@ const makeCommit = async (n) => {
         return;
     }
 
-    // Random date within the past 4 months
-    const now = moment();
-    const fourMonthsAgo = moment().subtract(4, "months");
-    const randomDate = moment(fourMonthsAgo.valueOf() + Math.random() * (now.valueOf() - fourMonthsAgo.valueOf())).format();
+    // Define the date range: from December 1st of last year to January 1st of this year
+    const startOfDecemberLastYear = moment().subtract(1, 'year').month(11).date(1); // December 1st of last year
+    const startOfJanuaryThisYear = moment().startOf('year'); // January 1st of this year
+
+    // Generate a random date between December 1st of last year and January 1st of this year
+    const randomDate = moment(startOfDecemberLastYear.valueOf() + Math.random() * (startOfJanuaryThisYear.valueOf() - startOfDecemberLastYear.valueOf())).format();
 
     const data = {
         date: randomDate
@@ -28,4 +30,4 @@ const makeCommit = async (n) => {
     makeCommit(n - 1);
 };
 
-makeCommit(40);
+makeCommit(35);
